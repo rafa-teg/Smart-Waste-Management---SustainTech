@@ -1,3 +1,5 @@
+<img width="2625" height="1163" alt="Image" src="https://github.com/user-attachments/assets/56c84c53-a218-470f-a93e-618a07c949da" />
+
 ♻️ Smart Waste Management - SustainTech
 Este projeto foi desenvolvido como parte da formação em Análise e Desenvolvimento de Sistemas (ADS) na FIAP. A solução foca-se na otimização da logística reversa de resíduos eletrónicos, unindo uma visão estratégica de negócio (Product Discovery) com uma arquitetura robusta de base de dados.
 
