@@ -30,4 +30,4 @@ Otimização de Rotas: Procedimentos para atualização dinâmica de localizaç�
 /database: Scripts SQL de criação de tabelas e constraints.
 /procedures: Scripts PL/SQL com as lógicas de automação.
 /docs: Documentação do Product Discovery e matriz CSD.
-Desenvolvido por um formando de ADS da FIAP focado em soluções escaláveis e sustentáveis.
+
