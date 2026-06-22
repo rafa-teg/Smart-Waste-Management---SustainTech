@@ -29,4 +29,8 @@ Otimização de Rotas: Procedimentos para atualização dinâmica de localizaç�
 - Estrutura do Repositório
 /database/scripts: Scripts SQL de criação de tabelas, constraints, sequences e da tabela de log de erros (01_tables.sql, 02_constraints.sql, 03_sequences.sql, 04_log_table.sql).
 /procedures: Scripts PL/SQL com as lógicas de automação (uma procedure por arquivo) e a procedure utilitária de log de erros (log_erro.sql).
+/tests: Scripts PL/SQL autocontidos que testam cada procedure (seed de dados + chamada + verificação).
+
+- Known Issues
+Deduplicação de agendamentos em AgendarColetaAutomatica (procedures/agendar_coleta_automatica.sql): a checagem de "já existe agendamento pendente?" usa o FK estático t_recipientes.t_agendamentos_id_agendamento, que a procedure nunca atualiza após criar um novo agendamento. Na prática, isso significa que a deduplicação não funciona entre execuções sucessivas: se um recipiente continuar acima de 80% de capacidade, cada chamada da procedure (ex.: um job diário) tende a criar um novo agendamento duplicado, já que o link do recipiente nunca passa a apontar para o agendamento mais recente. Esse comportamento foi identificado ao escrever tests/test_agendar_coleta_automatica.sql. Correção provável: atualizar esse FK na procedure ao criar um agendamento, ou trocar a estratégia de deduplicação para não depender de um vínculo estático.
 
