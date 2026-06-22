@@ -1,3 +1,12 @@
+-- Procedure utilitaria de log de erros, chamada pelos blocos EXCEPTION das demais procedures.
+--
+-- Parametros:
+--   p_nome_procedure - nome da procedure de origem do erro (truncado em 30 caracteres,
+--                       limite da coluna t_log_erros.nome_procedure).
+--   p_mensagem_erro  - mensagem de erro (normalmente SQLERRM); truncada em 500 caracteres.
+--
+-- Usa PRAGMA AUTONOMOUS_TRANSACTION: o INSERT e commitado numa transacao independente,
+-- entao o registro de log sobrevive mesmo que a procedure chamadora faca ROLLBACK depois.
 CREATE OR REPLACE PROCEDURE LogErro(
     p_nome_procedure IN VARCHAR2,
     p_mensagem_erro  IN VARCHAR2

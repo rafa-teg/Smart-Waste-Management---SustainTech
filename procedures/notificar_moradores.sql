@@ -1,4 +1,18 @@
 --ATIVIDADE 3 - TERCEIRA AUTOMATIZACAO - Notificacao aos Moradores
+--
+-- Percorre agendamentos confirmados (confirmado = 'SIM') e registra uma notificacao de
+-- "Dia de Coleta" para cada um, evitando duplicar quando ja existe notificacao equivalente.
+--
+-- Sem parametros.
+--
+-- Limitacao conhecida: t_notificacoes nao tem FK direta para t_agendamentos, entao a
+-- deduplicacao e feita por rota + caminhao + tipo de notificacao, nao pelo agendamento
+-- especifico. Se a mesma rota/caminhao for reutilizada para agendamentos em datas
+-- diferentes, uma notificacao legitima pode ser bloqueada por essa checagem.
+--
+-- Efeitos colaterais: INSERT em t_notificacoes. Cada agendamento e commitado isoladamente.
+--
+-- Chamada por: job agendado, tipicamente no dia anterior a coleta confirmada.
 CREATE OR REPLACE PROCEDURE NotificarMoradores IS
 BEGIN
     FOR agendamento IN (

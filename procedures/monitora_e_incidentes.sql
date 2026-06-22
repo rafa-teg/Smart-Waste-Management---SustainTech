@@ -1,5 +1,15 @@
 --ATIVIDADE 4 - QUARTA AUTOMATIZACAO -- Monitoramento e Resposta Automatizados para Incidentes Durante a Coleta
-
+--
+-- Percorre caminhoes com status 'Avariado' ou 'Atrasado'; para cada rota 'Em execucao'
+-- associada, registra uma notificacao de 'Incidente' e marca a rota como interrompida.
+--
+-- Sem parametros.
+--
+-- Efeitos colaterais: INSERT em t_notificacoes, UPDATE em t_rotas.status_rota. Cada
+-- caminhao e processado e commitado isoladamente — falha em um caminhao nao desfaz o
+-- trabalho ja salvo para outros no mesmo lote.
+--
+-- Chamada por: job agendado de monitoramento de frota, em intervalos curtos.
 CREATE OR REPLACE PROCEDURE MonitoraEIncidentes IS
 BEGIN
     FOR caminhao IN (SELECT id_caminhao, status FROM t_caminhoes WHERE status IN ('Avariado', 'Atrasado'))

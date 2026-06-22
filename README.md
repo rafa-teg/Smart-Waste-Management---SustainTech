@@ -27,7 +27,6 @@ Gestão de Incidentes: Monitoramento proativa da frota. Se um camião reportar o
 Otimização de Rotas: Procedimentos para atualização dinâmica de localização e status (Em execução, Concluída), visando a redução de custos de combustível.
 
 - Estrutura do Repositório
-/database: Scripts SQL de criação de tabelas e constraints.
-/procedures: Scripts PL/SQL com as lógicas de automação.
-/docs: Documentação do Product Discovery e matriz CSD.
+/database/scripts: Scripts SQL de criação de tabelas, constraints, sequences e da tabela de log de erros (01_tables.sql, 02_constraints.sql, 03_sequences.sql, 04_log_table.sql).
+/procedures: Scripts PL/SQL com as lógicas de automação (uma procedure por arquivo) e a procedure utilitária de log de erros (log_erro.sql).
 

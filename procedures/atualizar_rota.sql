@@ -1,4 +1,20 @@
 --ATIVIDADE 1 - PRIMEIRA AUTOMATIZACAO - Criacao do Procedimento para Atualizar a Localizacao  do Caminhao e Otimizar Rotas
+--
+-- Atualiza o status da rota "Em execucao" de um caminhao e registra o evento em t_notificacoes.
+--
+-- Parametros:
+--   p_id_caminhao      - ID do caminhao cuja rota em execucao sera atualizada.
+--   p_nova_localizacao - NAO UTILIZADO atualmente: nao existe coluna de localizacao em
+--                        t_rotas/t_caminhoes (so t_recipientes tem localizacao). Mantido na
+--                        assinatura por compatibilidade, mas nao tem efeito nenhum hoje.
+--   p_status_rota      - Novo status a aplicar na rota (ex.: 'Em execucao', 'Concluida').
+--
+-- Pre-condicao: deve existir uma rota com status_rota = 'Em execucao' para o caminhao
+-- informado; caso contrario lanca ORA-20001 (NO_DATA_FOUND).
+--
+-- Efeitos colaterais: UPDATE em t_rotas, INSERT em t_notificacoes, COMMIT.
+-- Em caso de erro, registra em t_log_erros (LogErro) e relanca o erro para o chamador
+-- (nao engole a excecao).
 CREATE OR REPLACE PROCEDURE AtualizarRota(
     p_id_caminhao IN t_caminhoes.id_caminhao%TYPE,
     p_nova_localizacao IN VARCHAR2,

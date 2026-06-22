@@ -1,4 +1,18 @@
 --ATIVIDADE 2 - SEGUNDA AUTOMATIZACAO  - AGENDAR COLETA AUTOMaTICA
+--
+-- Percorre todos os recipientes e cria um agendamento de coleta automatico para o dia
+-- seguinte quando a capacidade atual atinge o limiar de negocio de 80% da capacidade
+-- maxima (capacidade_atual >= 0.8 * capacidade_max).
+--
+-- Sem parametros.
+--
+-- Pre-condicao: precisa existir ao menos um caminhao com status = 'Disponivel' para alocar
+-- ao novo agendamento; se nao houver, o recipiente e pulado e o caso e logado (LogErro).
+--
+-- Efeitos colaterais: INSERT em t_agendamentos. Cada recipiente e processado e commitado
+-- isoladamente — falha em um recipiente nao afeta os agendamentos ja criados para outros.
+--
+-- Chamada por: job agendado (ex.: DBMS_SCHEDULER) periodico, ou execucao manual.
 CREATE OR REPLACE PROCEDURE AgendarColetaAutomatica AS
 BEGIN
     FOR r IN (SELECT id_recipiente, capacidade_atual, capacidade_max FROM t_recipientes)
