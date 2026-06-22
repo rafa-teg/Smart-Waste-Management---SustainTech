@@ -25,7 +25,9 @@ BEGIN
     COMMIT;
 EXCEPTION
     WHEN NO_DATA_FOUND THEN
+        LogErro('AtualizarRota', 'Nenhuma rota encontrada para o caminhao ' || p_id_caminhao);
         RAISE_APPLICATION_ERROR(-20001, 'Nenhuma rota encontrada para este caminh o.');
     WHEN OTHERS THEN
+        LogErro('AtualizarRota', SQLERRM);
         RAISE_APPLICATION_ERROR(-20002, SQLERRM);
 END AtualizarRota;

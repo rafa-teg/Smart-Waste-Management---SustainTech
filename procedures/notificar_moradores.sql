@@ -27,7 +27,7 @@ BEGIN
             COMMIT;
         EXCEPTION
             WHEN OTHERS THEN
-                DBMS_OUTPUT.PUT_LINE('Erro ao enviar notifica  o: ' || SQLERRM);
+                LogErro('NotificarMoradores', SQLERRM);
                 ROLLBACK;
         END;
     END LOOP;

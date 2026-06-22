@@ -27,12 +27,18 @@ BEGIN
                             (SELECT id_rota FROM t_rotas WHERE t_caminhoes_id_caminhao = v_id_caminhao AND ROWNUM = 1)); -- Exemplo simples de alocacao de rota
                     COMMIT;
                 END IF;
+            EXCEPTION
+                WHEN NO_DATA_FOUND THEN
+                    LogErro('AgendarColetaAutomatica', 'Nenhum caminhao disponivel para o recipiente ' || r.id_recipiente);
+                    ROLLBACK;
+                WHEN OTHERS THEN
+                    LogErro('AgendarColetaAutomatica', SQLERRM);
+                    ROLLBACK;
             END;
         END IF;
     END LOOP;
 EXCEPTION
     WHEN OTHERS THEN
-        -- Log de erro
-        DBMS_OUTPUT.PUT_LINE('Erro durante a automa  o de agendamento: ' || SQLERRM);
+        LogErro('AgendarColetaAutomatica', SQLERRM);
         ROLLBACK;
 END AgendarColetaAutomatica;
