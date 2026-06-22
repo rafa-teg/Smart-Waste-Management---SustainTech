@@ -31,8 +31,8 @@ BEGIN
         DECLARE
             v_mensagem VARCHAR2(255);
         BEGIN
-            v_mensagem := 'Lembrete: A coleta de res duos acontecer  em ' || TO_CHAR(agendamento.data_agendada, 'DD/MM/YYYY') ||
-                          '. Por favor, certifique-se de separar recicl veis e n o recicl veis conforme instru do.';
+            v_mensagem := 'Lembrete: A coleta de resíduos acontecerá em ' || TO_CHAR(agendamento.data_agendada, 'DD/MM/YYYY') ||
+                          '. Por favor, certifique-se de separar recicláveis e não recicláveis conforme as instruções de coleta seletiva.';
 
             -- Inserir a notifica  o na tabela t_notificacoes
             INSERT INTO t_notificacoes (id_notificacao, tipo_notificacao, mensagem, data_hora_envio, t_caminhoes_id_caminhao, t_rotas_id_rota)
